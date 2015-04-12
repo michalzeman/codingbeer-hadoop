@@ -17,7 +17,7 @@ import static com.codingbeer.hadoop.matrix.multiplication.MatrixMultiplicationCo
 public class MatrixMultiplicationMapper extends Mapper<LongWritable, Text, Text, Text> {
 
     /**
-     * Matrix dimension are A 4x4 and for B 4X4
+     * Matrix dimension are A 5x5 and for B 5X5
      * @param key
      * @param value JSON array in the form ["matrix_name", row, column, value]
      * @param context
