@@ -23,6 +23,11 @@ public class InvertedIndexReducer extends Reducer<Text, Text, NullWritable, Text
             JsonArrayBuilder resultArray = Json.createArrayBuilder();
 
             //TODO: add implementation hint output should be in format ["word",["resource_1.txt","resource_2.txt"]]
+            resultArray.add(key.toString());
+            values.iterator().forEachRemaining(documentId -> jsonArray.add(documentId.toString()));
+            resultArray.add(jsonArray);
+            jsonWriter.writeArray(resultArray.build());
+            context.write(NullWritable.get(), new Text(stringWriter.getBuffer().toString()));
         }
     }
 }

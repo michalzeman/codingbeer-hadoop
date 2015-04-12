@@ -20,5 +20,10 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
                 //TODO: add implementation out in form /word/,1
+        StringTokenizer stringTokenizer = new StringTokenizer(value.toString(), " \t\n\r\f,)(:;.?!/<>[]");
+        while (stringTokenizer.hasMoreTokens()) {
+            word.set(stringTokenizer.nextToken());
+            context.write(word, one);
+        }
     }
 }

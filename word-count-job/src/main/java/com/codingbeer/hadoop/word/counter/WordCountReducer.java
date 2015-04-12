@@ -19,5 +19,16 @@ public class WordCountReducer extends Reducer<Text, IntWritable, NullWritable, T
     @Override
     protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
         //TODO: add implementation hint in form ["someWord",numberOfCount]
+        int sum = 0;
+        for (IntWritable value : values) {
+            sum = sum + value.get();
+        }
+        try (StringWriter stringWriter = new StringWriter();
+             JsonWriter jsonWriter = Json.createWriter(stringWriter)) {
+            JsonArrayBuilder jsonArray = Json.createArrayBuilder();
+            jsonArray.add(key.toString()).add(sum);
+            jsonWriter.writeArray(jsonArray.build());
+            context.write(NullWritable.get(), new Text(stringWriter.getBuffer().toString()));
+        }
     }
 }

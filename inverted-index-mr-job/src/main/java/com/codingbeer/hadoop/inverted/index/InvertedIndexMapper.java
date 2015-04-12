@@ -23,6 +23,20 @@ public class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, Text> 
             JsonArray jsonArray = reader.readArray();
             if (jsonArray.size() == 2) {
                 //TODO: add implementation
+                String words = jsonArray.getString(1);
+                String document_id = jsonArray.getString(0);
+                Text keyMap = new Text();
+                Text valMap = new Text(document_id);
+                Set<String> wordsSet = new HashSet<>();
+                StringTokenizer stringTokenizer = new StringTokenizer(words, " \t\n\r\f,)(:;.?!/<>[]{}\"'");
+                while(stringTokenizer.hasMoreElements()) {
+                    String word = stringTokenizer.nextToken();
+                    if (!wordsSet.contains(word)) {
+                        wordsSet.add(word);
+                        keyMap.set(word);
+                        context.write(keyMap, valMap);
+                    }
+                }
             }
         }
     }
