@@ -31,9 +31,8 @@ public abstract class AbstractHadoopTest {
     }
 
     protected TestFileInfo getTestFileInfo() {
-        final String name = this.getClass().getCanonicalName();
-        final String path = name.replaceAll("\\.", File.separator);
-        return new TestFileInfo(File.separator + path + "In." + getFileType(), File.separator + path + "Out." + getFileType());
+        final String name = this.getClass().getSimpleName();
+        return new TestFileInfo(name + "In." + getFileType(), name + "Out." + getFileType());
     }
 
     protected List<Text> readFileByLinesToList(final String fileName) {
