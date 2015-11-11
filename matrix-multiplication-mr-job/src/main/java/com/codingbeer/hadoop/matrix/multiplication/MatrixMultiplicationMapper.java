@@ -35,7 +35,9 @@ public class MatrixMultiplicationMapper extends Mapper<LongWritable, Text, Text,
             int val = jsonArray.getInt(3);
 
             StringBuilder valueOut = new StringBuilder(START_ARRAY_STR);
-            valueOut.append("\"").append(matrix).append("\"").append(ARRAY_DELIMITER_STR).append(row).append(ARRAY_DELIMITER_STR).append(col).append(ARRAY_DELIMITER_STR).append(val).append(END_ARRAY_STR);
+            valueOut.append("\"").append(matrix).append("\"").append(ARRAY_DELIMITER_STR).append(row)
+                    .append(ARRAY_DELIMITER_STR).append(col).append(ARRAY_DELIMITER_STR)
+                    .append(val).append(END_ARRAY_STR);
             for (int k = 0; k <= 4; k++) {
                 StringBuilder keyOut = new StringBuilder();
                 switch (matrix) {
